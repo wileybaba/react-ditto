@@ -1,12 +1,10 @@
 import React, { ReactElement, useState } from "react";
-import { useLiveQuery } from "@dittolive/react-ditto";
+import { usePendingCursorOperation } from "@dittolive/react-ditto";
 
 export default function App(): ReactElement {
   const [newTaskInput, setNewTaskInput] = useState("");
 
-  const { documents, ditto } = useLiveQuery<any>((store) =>
-    store.collection("tasks").findAll()
-  );
+  const { documents, ditto } = usePendingCursorOperation<any>({collection: 'tasks'});
 
   const submit = () => {
     if (newTaskInput.length === 0) {
